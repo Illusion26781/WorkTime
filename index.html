@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Work Time!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        #timer-status {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 16px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        #timer-status.running {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        #timer-status.stopped {
+            background: #ffccbc;
+            color: #d84315;
+        }
+        
+        .section {
+            margin: 25px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px 5px 5px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        #interval-btn {
+            background: #667eea;
+            color: white;
+        }
+        
+        #interval-btn:hover {
+            background: #5568d3;
+        }
+        
+        #start-btn {
+            background: #4CAF50;
+            color: white;
+            flex: 1;
+        }
+        
+        #start-btn:hover {
+            background: #45a049;
+        }
+        
+        #stop-btn {
+            background: #f44336;
+            color: white;
+            flex: 1;
+        }
+        
+        #stop-btn:hover {
+            background: #da190b;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        h2 {
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        #history {
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        
+        .history-entry {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .history-entry span {
+            flex: 1;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .grade-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .grade-btn {
+            padding: 6px 12px;
+            font-size: 13px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .grade-btn.active {
+            border-color: #666;
+            font-weight: bold;
+        }
+        
+        .grade-btn:hover {
+            border-color: #999;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⏰ Work Time!</h1>
+        <div id="timer-status" class="stopped">Timer is stopped</div>
+
+        <div class="section">
+            <label for="interval">Interval (minutes):</label>
+            <div style="display: flex; gap: 10px;">
+                <input id="interval" type="number" value="5" min="1" max="120" />
+                <button id="interval-btn" onclick="setIntervalMinutes()">Apply</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="button-group">
+                <button id="start-btn" onclick="start()">▶ Start</button>
+                <button id="stop-btn" onclick="stop()">⏹ Stop</button>
+            </div>
+        </div>
+
+        <h2>📋 History</h2>
+        <ul id="history"></ul>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
