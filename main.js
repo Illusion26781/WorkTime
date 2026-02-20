@@ -79,7 +79,10 @@ function startTimer() {
         return; // Already running
     }
 
+    console.log(`Starting timer with interval ${appState.intervalMinutes} minutes`);
+
     timerInterval = setInterval(() => {
+        
         const notificationTime = new Date();
         
         // Create notification

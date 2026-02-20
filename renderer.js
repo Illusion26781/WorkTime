@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron";
+const { ipcRenderer } = require('electron')
 
 function setIntervalMinutes() {
     const minutes = parseInt(document.getElementById("interval").value);
